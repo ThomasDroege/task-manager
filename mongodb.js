@@ -14,34 +14,28 @@ MongoClient.connect(connectionURL, { useUnifiedTopology: true}, (error, client) 
 
     const db = client.db(databaseName)
 
+//  db.collection('users').updateOne({
+//         _id: new ObjectID("5ec6c1b5d3458e2a88aab6db")
+//     }, {
+//         $inc:{
+//             age: -10
+//         }
+//     }).then((result) => {
+//         console.log(result)
+//     }).catch((error) =>{
+//         console.log(error)
+//     })
 
-    db.collection('users').findOne({ _id: new ObjectID("5ec428679c6dd436e402427f")}, (error, user) =>{
-        if(error){
-            return console.log('Unable to fetch user')
+    db.collection('task').updateMany({
+        completed: true
+    }, {
+        $set: {
+            completed: false
         }
-        
-        console.log(user)
-    })
-    
-    //gives back a pointer/cursor and save it to array 
-    db.collection('users').find({age: 32}).toArray( (error, users) => {
-       console.log(users) 
+    }).then((result) => {
+        console.log(result.modifiedCount)
+    }).catch((error) =>{
+        console.log(error)
     })
 
-    //gives back a pointer/cursor and save it to a number (less consumption of ram i guess)
-    db.collection('users').find({age: 32}).count( (error, count) => {
-        console.log(count) 
-     })
-
-     db.collection('task').findOne({_id: new ObjectID("5ec2ed861dfc3a231cedba0a")}, (error, task) =>{
-         if(error){
-             return console.log('Unable to fetch task')
-         }
-
-         console.log(task)
-     })
-   
-     db.collection('task').find({completed: false}).toArray( (error, tasks) => {
-         console.log(tasks)
-     })
 })
