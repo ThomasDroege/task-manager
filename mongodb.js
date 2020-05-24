@@ -7,7 +7,7 @@ const databaseName = 'task-manager'
 
 // Deprecated constructor to MongoClient
 // useNewUrlParser: true 
-MongoClient.connect(connectionURL, { useUnifiedTopology: true}, (error, client) => {
+MongoClient.connect(connectionURL, { useUnifiedTopology: true }, (error, client) => {
     if(error){
         return console.log('Unable to connect to database!')
     } 
