@@ -6,19 +6,9 @@ const taskRouter = require('./routers/task')
 const app = express()
 const port =process.env.port || 3000
 
-//with middleware (app.use): new request -> app.use -> run route handler
-// app.use((req, res, next) =>{ 
-//     if(req.method === 'GET') {
-//         res.send('GET requests are disabled')
-//     } else {
-//         //need to be executed to get to the next event (run route handler)
-//         next()
-//     }
+// app.use((req, res, next) => {
+//     res.status(503).send('The page is under maintenance')
 // })
-
-app.use((req, res, next) => {
-    res.status(503).send('The page is under maintenance')
-})
 
 //automatically parse incoming json to an object, for e.g. access it in request-handler
 app.use(express.json())
