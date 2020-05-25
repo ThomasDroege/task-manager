@@ -11,6 +11,10 @@ const auth = async (req, res, next) => {
             throw new Error()
         }
 
+        // the specific token needs to be stored to delete the right token within the logout route
+        //(e.g. the laptop token instead the tablet token which is also logged in) 
+        req.token = token
+        
         //store the found user to the request object 
         req.user = user
         next()
