@@ -50,6 +50,12 @@ const userSchema = new mongoose.Schema({
     }]
 })
 
+//virtual property: is not stored in the database, its a relationship between to entities (here: user and tasks)
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'owner'
+})
 
 userSchema.methods.toJSON = function () {
     const user = this

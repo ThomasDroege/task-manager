@@ -1,9 +1,18 @@
 const express = require('express')
+const auth = require('../middleware/auth')
 const router = new express.Router()
 const Task = require('../models/task')
 
-router.post('/tasks', async (req, res) => {
-    const task = new Task(req.body)
+router.post('/tasks', auth, async (req, res) => {
+
+    // ... : take all properties of req.body
+    // and add the owner "manuelly", which is not necessarly provided by the user request
+    const task = new Task({
+        ...req.body,
+        owner: req.user._id
+
+    })
+    
     try {
         await task.save()
         await res.status(201).send(task)

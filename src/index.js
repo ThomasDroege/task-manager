@@ -17,3 +17,19 @@ app.use([userRouter, taskRouter])
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
+
+const Task = require('./models/task')
+const User = require('./models/user')
+
+const main = async () => {
+    // const task = await Task.findById('5eceb9a418df2222d4fb0b23')
+    // // mongoose helper function to get the back the specitic user object related to the given id
+    // await task.populate('owner').execPopulate()
+    // console.log(task.owner)
+
+    const user = await User.findById('5eceb853a29a012b242c410d')
+    await user.populate('tasks').execPopulate()
+    console.log(user.tasks)
+}
+
+main()
