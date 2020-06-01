@@ -50,6 +50,8 @@ const userSchema = new mongoose.Schema({
             required: true
         }
     }]
+}, {
+    timestamps: true
 })
 
 //virtual property: is not stored in the database, its a relationship between to entities (here: user and tasks)
